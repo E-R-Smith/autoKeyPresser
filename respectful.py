@@ -77,7 +77,7 @@ if __name__ == "__main__":
     root = tk.Tk()
     root.title("Respectful")
     root.geometry("250x150")
-    root.iconbitmap('./icon.ico')
+    root.iconbitmap('./assets/icon.ico')
     root.configure(background='#8bb500')
     log = tk.StringVar()
     log.set("")
