@@ -32,19 +32,17 @@ def kickoff():
     global log
     global logArea
     
-    log.set(log.get() + "Starting in 3...\n")
-    logArea.insert('1.0', "Starting in 3...\n")
-    sleep(1)
-    log.set(log.get() + "2...\n")
-    logArea.insert('1.0', "2...\n")
-    sleep(1)
-    log.set(log.get() + "1...\n")
-    logArea.insert('1.0', "1...\n")
-    sleep(1)
+    log.set(log.get() + "Starting in\n")
+    logArea.insert('1.0', "Starting in\n")
+    for i in range(3, 0, -1):
+        log.set(f"{i}...\n")
+        logArea.insert('1.0', f"{i}...\n")
+        sleep(1)
+
     while running_job:
         presskey()
     log.set(log.get() + "Stopped\n")
-    logArea.insert('1.0', "Stopped")
+    logArea.insert('1.0', "Stopped\n")
 
 
 class GUI:
