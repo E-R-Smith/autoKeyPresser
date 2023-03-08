@@ -6,8 +6,12 @@ from functools import partial
 from threading import Thread
 import datetime
 from pynput.keyboard import Key, Controller
-# adapted from https://stackoverflow.com/questions/67999559/start-and-stop-a-repeating-task-in-a-thread-from-a-button-in-tkinter
+import ctypes
 
+myappid = u'ersolstice.keypreser.v0.1' #https://stackoverflow.com/questions/1551605/how-to-set-applications-taskbar-icon-in-windows-7/1552105
+ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+
+# adapted from https://stackoverflow.com/questions/67999559/start-and-stop-a-repeating-task-in-a-thread-from-a-button-in-tkinter
 
 # GLOBALS #
 running_job = False
@@ -35,6 +39,8 @@ def kickoff():
     log.set(log.get() + "Starting in\n")
     logArea.insert('1.0', "Starting in\n")
     for i in range(3, 0, -1):
+        if not running_job:
+            break # for when STOP is pressed before countdown ends
         log.set(f"{i}...\n")
         logArea.insert('1.0', f"{i}...\n")
         sleep(1)
@@ -71,6 +77,8 @@ if __name__ == "__main__":
     root = tk.Tk()
     root.title("Respectful")
     root.geometry("250x150")
+    root.iconbitmap('./icon.ico')
+    root.configure(background='#8bb500')
     log = tk.StringVar()
     log.set("")
     app = GUI(root)
